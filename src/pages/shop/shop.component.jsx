@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {CollectionsPreview} from '../../components/collections-preview/collections-preview.components';
 import {SHOP_DATA} from './shop.data';
 
