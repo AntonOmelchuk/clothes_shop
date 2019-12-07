@@ -4,15 +4,16 @@ import {ReactComponent as Logo} from '../../assets/crown.svg';
 
 import './header.style.scss';
 import {auth} from '../../firebase/firebase.utils';
+import {connect} from 'react-redux';
 
-export const Header = ({user}) => (
+const Header = ({currentUser}) => (
   <div className='header'>
     <Link className='logo-container' to='/'>
       <Logo className='logo' />
     </Link>
     <div className='options'>
-      {user && user.displayName && (
-        <div className='option'>Hi, {user.displayName.split(' ')[0]}!</div>
+      {currentUser && currentUser.displayName && (
+        <div className='option'>Hi, {currentUser.displayName.split(' ')[0]}!</div>
       )}
       <Link className='option' to='/shop'>
         shop
@@ -20,7 +21,7 @@ export const Header = ({user}) => (
       <Link className='option' to='/contact'>
         contact
       </Link>
-      {user ? (
+      {currentUser ? (
         <div className='option' onClick={() => auth.signOut()}>
           Sign Out
         </div>
@@ -32,3 +33,9 @@ export const Header = ({user}) => (
     </div>
   </div>
 );
+
+const mapDispatchToProps = state => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapDispatchToProps, null)(Header);
