@@ -34,8 +34,8 @@ const Header = ({currentUser}) => (
   </div>
 );
 
-const mapDispatchToProps = state => ({
-  currentUser: state.user.currentUser,
+const mapDispatchToProps = ({user}) => ({
+  currentUser: user.currentUser,
 });
 
 export default connect(mapDispatchToProps, null)(Header);
