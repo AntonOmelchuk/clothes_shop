@@ -36,7 +36,7 @@ const CheckoutPage = ({cartItems, total}) => (
     ))}
     <div className='total'>Total ${total}</div>
     <div className='test-card'>
-      Test credit car for payment
+      Test credit cart for payment
       <br />
       4242 4242 4242 4242 - Exp: 01/20 - CCV: 123
     </div>
