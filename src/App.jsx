@@ -6,14 +6,14 @@ import {createStructuredSelector} from 'reselect';
 import './App.css';
 
 import {HomePage} from './pages/homepage/homepage.component';
-import {ShopPage} from './pages/shop/shop.component';
+import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import {SignInAndSignUp} from './pages/sign-in-and-sign-up/sign-in-sign-up.component';
 
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 
-import {setCurrentUser} from './redux/users/user-action';
+import {setCurrentUser} from './redux/users/user.action';
 import {selectCurrentUser} from './redux/users/user.selectors';
 
 class App extends React.Component {
@@ -31,9 +31,9 @@ class App extends React.Component {
             ...snapShot.data(),
           });
         });
-      } else {
-        setCurrentUser(userAuth);
       }
+
+      setCurrentUser(userAuth);
     });
   }
 
