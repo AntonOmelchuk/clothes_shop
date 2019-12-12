@@ -8,9 +8,8 @@ export const selectShopCollections = createSelector(
 );
 
 export const selectCollectionItem = collectionUrlParam =>
-  createSelector(
-    [selectShopCollections],
-    collections => collections[collectionUrlParam]
+  createSelector([selectShopCollections], collections =>
+    collections ? collections[collectionUrlParam] : null
   );
 
 export const selectCollectionForPreview = createSelector(
