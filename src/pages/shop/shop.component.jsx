@@ -2,14 +2,14 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {fetchingCollectionsStartAsync} from '../../redux/shop/shop.action';
+import {fetchingCollectionsStart} from '../../redux/shop/shop.action';
 
 import {CollectionsOverviewContainer} from '../../components/collections-overview/collections-overview.container';
 import {CollectionPageContainer} from '../collection/collection-page.container';
 
 class ShopPage extends React.Component {
   componentDidMount() {
-    this.props.fetchingCollectionsStartAsync();
+    this.props.fetchingCollectionsStart();
   }
 
   render() {
@@ -31,4 +31,4 @@ class ShopPage extends React.Component {
   }
 }
 
-export default connect(null, {fetchingCollectionsStartAsync})(ShopPage);
+export default connect(null, {fetchingCollectionsStart})(ShopPage);
