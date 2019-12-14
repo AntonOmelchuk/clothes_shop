@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import './sign-in.style.scss';
 
+import {singInWithGoogle, auth} from '../../firebase/firebase.utils';
+import {googleSignInStart} from '../../redux/users/user.action';
+
 import {FormInput} from '../form-input/form-input.component';
 import {CustomButton} from '../custom-button/custom-button.component';
-import {singInWithGoogle, auth} from '../../firebase/firebase.utils';
 
-export class SignIn extends Component {
+class SignIn extends Component {
   constructor() {
     super();
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
     };
   }
 
@@ -39,6 +42,7 @@ export class SignIn extends Component {
   };
 
   render() {
+    const {googleSignInStart} = this.props;
     return (
       <div className='sign-in'>
         <h2>I already have an account</h2>
@@ -62,7 +66,11 @@ export class SignIn extends Component {
           />
           <div className='buttons'>
             <CustomButton type='submit'>Sign In</CustomButton>
-            <CustomButton onClick={singInWithGoogle} isGoogleSignIn={true}>
+            <CustomButton
+              type='button'
+              onClick={googleSignInStart}
+              isGoogleSignIn={true}
+            >
               Sign In with Google
             </CustomButton>
           </div>
@@ -71,3 +79,5 @@ export class SignIn extends Component {
     );
   }
 }
+
+export default connect(null, {googleSignInStart})(SignIn);

@@ -10,6 +10,14 @@ import {
   fetchingCollectionsSuccess,
 } from './shop.action';
 
+export function* fetchCollectionsStart() {
+  yield takeEvery(
+    ShopActionTypes.FETCHING_COLLECTIONS_START,
+    fetchCollectionsAsync
+  );
+}
+
+
 function* fetchCollectionsAsync() {
   try {
     const collectionRef = firestore.collection('collections');
@@ -22,11 +30,4 @@ function* fetchCollectionsAsync() {
   } catch (err) {
     yield put(fetchingCollectionsFailure(err));
   }
-}
-
-export function* fetchCollectionsStart() {
-  yield takeEvery(
-    ShopActionTypes.FETCHING_COLLECTIONS_START,
-    fetchCollectionsAsync
-  );
 }
