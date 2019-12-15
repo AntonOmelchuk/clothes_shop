@@ -15,6 +15,22 @@ import {
   googleProvider,
 } from '../../firebase/firebase.utils';
 
+export function* watcherGoogleSignInStart() {
+  yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, sagaGoogleSignIn);
+}
+
+export function* watcherEmailSignInStart() {
+  yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, sagaEmailSignIn);
+}
+
+export function* watcherCheckUserSignIn() {
+  yield takeLatest(UserActionTypes.CHECK_USER_SIGN_IN, sagaCheckUserSignIn);
+}
+
+export function* watcherSignOutStart() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_START, sagaSignOut);
+}
+
 export function* sagaSnapshotFromUser(user) {
   const userRef = yield call(createUserProfileDocument, user);
   const userSnapshot = yield userRef.get();
@@ -56,22 +72,6 @@ export function* sagaSignOut() {
   } catch (err) {
     yield put(signOutFailure(err));
   }
-}
-
-export function* watcherGoogleSignInStart() {
-  yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, sagaGoogleSignIn);
-}
-
-export function* watcherEmailSignInStart() {
-  yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, sagaEmailSignIn);
-}
-
-export function* watcherCheckUserSignIn() {
-  yield takeLatest(UserActionTypes.CHECK_USER_SIGN_IN, sagaCheckUserSignIn);
-}
-
-export function* watcherSignOutStart() {
-  yield takeLatest(UserActionTypes.SIGN_OUT_START, sagaSignOut);
 }
 
 export default function* userSaga() {

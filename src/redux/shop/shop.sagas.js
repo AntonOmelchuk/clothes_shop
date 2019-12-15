@@ -1,22 +1,22 @@
-import {takeEvery, call, put} from 'redux-saga/effects';
+import {takeEvery, call, put, all} from 'redux-saga/effects';
 
-import {ShopActionTypes} from './types';
 import {
   convertCollectionsShapshotToMap,
   firestore,
 } from '../../firebase/firebase.utils';
+
+import {ShopActionTypes} from './types';
 import {
   fetchingCollectionsFailure,
   fetchingCollectionsSuccess,
 } from './shop.action';
 
-export function* fetchCollectionsStart() {
+export function* watcherFetchCollectionsStart() {
   yield takeEvery(
     ShopActionTypes.FETCHING_COLLECTIONS_START,
     fetchCollectionsAsync
   );
 }
-
 
 function* fetchCollectionsAsync() {
   try {
@@ -30,4 +30,8 @@ function* fetchCollectionsAsync() {
   } catch (err) {
     yield put(fetchingCollectionsFailure(err));
   }
+}
+
+export default function* shopSage() {
+  yield all([call(watcherFetchCollectionsStart)]);
 }
