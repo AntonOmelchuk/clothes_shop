@@ -40,6 +40,15 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const getCurrentUser = () => {
+  return new Promise((res, rej) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      res(userAuth);
+    }, rej);
+  });
+};
+
 export const convertCollectionsShapshotToMap = collections => {
   const convertedCollections = collections.docs.map(docShapshot => {
     const {title, items} = docShapshot.data();

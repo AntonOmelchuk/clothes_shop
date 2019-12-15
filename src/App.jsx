@@ -12,8 +12,13 @@ import CheckoutPage from './pages/checkout/checkout.component';
 import {SignInAndSignUp} from './pages/sign-in-and-sign-up/sign-in-sign-up.component';
 
 import {selectCurrentUser} from './redux/users/user.selectors';
+import {checkUserSignIn} from './redux/users/user.action';
 
 class App extends React.Component {
+  componentDidMount() {
+    this.props.checkUserSignIn();
+  }
+
   render() {
     return (
       <div>
@@ -39,4 +44,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, {checkUserSignIn})(App);
