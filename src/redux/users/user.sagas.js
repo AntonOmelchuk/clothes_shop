@@ -6,6 +6,8 @@ import {
   signInSuccess,
   signOutFailure,
   signOutSuccess,
+  signUpFailure,
+  singUpSuccess,
 } from './user.action';
 
 import {
@@ -14,6 +16,10 @@ import {
   getCurrentUser,
   googleProvider,
 } from '../../firebase/firebase.utils';
+
+// ======================================== //
+//          Sagas Watchers                  //
+// ======================================== //
 
 export function* watcherGoogleSignInStart() {
   yield takeLatest(UserActionTypes.GOOGLE_SIGN_IN_START, sagaGoogleSignIn);
@@ -31,8 +37,20 @@ export function* watcherSignOutStart() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, sagaSignOut);
 }
 
-export function* sagaSnapshotFromUser(user) {
-  const userRef = yield call(createUserProfileDocument, user);
+export function* watcherSignUpStart() {
+  yield takeLatest(UserActionTypes.SIGN_UP_START, sagaSignUpStart);
+}
+
+export function* watcherSignUpSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, sagaSignInAfterSignUp);
+}
+
+// ======================================== //
+//          Sagas functions                 //
+// ======================================== //
+
+export function* sagaSnapshotFromUser(user, additionalData) {
+  const userRef = yield call(createUserProfileDocument, user, additionalData);
   const userSnapshot = yield userRef.get();
   yield put(signInSuccess({id: userSnapshot.id, ...userSnapshot.data()}));
 }
@@ -74,11 +92,27 @@ export function* sagaSignOut() {
   }
 }
 
+export function* sagaSignUpStart({payload: {email, password, displayName}}) {
+  try {
+    const {user} = yield auth.createUserWithEmailAndPassword(email, password);
+
+    yield put(singUpSuccess({user, additionalData: {displayName}}));
+  } catch (err) {
+    yield put(signUpFailure());
+  }
+}
+
+export function* sagaSignInAfterSignUp({payload: {user, additionalData}}) {
+  yield sagaSnapshotFromUser(user, additionalData);
+}
+
 export default function* userSaga() {
   yield all([
     call(watcherGoogleSignInStart),
     call(watcherEmailSignInStart),
     call(watcherCheckUserSignIn),
     call(watcherSignOutStart),
+    call(watcherSignUpStart),
+    call(watcherSignUpSuccess),
   ]);
 }
