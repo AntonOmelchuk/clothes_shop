@@ -17,11 +17,12 @@ import {ReactComponent as Logo} from '../../assets/crown.svg';
 import {selectCurrentUser} from '../../redux/users/user.selectors';
 import {selectCartHidden} from '../../redux/cart/cart.selectors';
 import {signOutStart} from '../../redux/users/user.action';
+import {hideCart} from '../../redux/cart/cart.action';
 
-const Header = ({currentUser, hidden, signOutStart}) => (
+const Header = ({currentUser, hidden, signOutStart, hideCart}) => (
   <HeaderContainer>
     <LogoContainer to='/'>
-      <Logo />
+      <Logo onClick={() => hideCart()} />
     </LogoContainer>
     <OptionsContainer>
       {currentUser && currentUser.displayName && (
@@ -29,10 +30,20 @@ const Header = ({currentUser, hidden, signOutStart}) => (
           Hi, {currentUser.displayName.split(' ')[0]}!
         </OptionLink>
       )}
-      <OptionLink to='/shop'>shop</OptionLink>
-      <OptionLink to='/contact'>contact</OptionLink>
+      <OptionLink to='/shop' onClick={() => hideCart()}>
+        shop
+      </OptionLink>
+      <OptionLink to='/contact' onClick={() => hideCart()}>
+        contact
+      </OptionLink>
       {currentUser ? (
-        <OptionLink as={`div`} onClick={signOutStart}>
+        <OptionLink
+          as={`div`}
+          onClick={() => {
+            signOutStart();
+            hideCart();
+          }}
+        >
           Sign Out
         </OptionLink>
       ) : (
@@ -49,4 +60,4 @@ const mapDispatchToProps = createStructuredSelector({
   hidden: selectCartHidden,
 });
 
-export default connect(mapDispatchToProps, {signOutStart})(Header);
+export default connect(mapDispatchToProps, {signOutStart, hideCart})(Header);
