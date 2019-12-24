@@ -21,7 +21,7 @@ import {signOutStart} from '../../redux/users/user.action';
 const Header = ({currentUser, hidden, signOutStart}) => (
   <HeaderContainer>
     <LogoContainer to='/'>
-      <Logo className='logo' />
+      <Logo />
     </LogoContainer>
     <OptionsContainer>
       {currentUser && currentUser.displayName && (
