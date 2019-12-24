@@ -5,7 +5,7 @@ import {SignInAndSignUpContainer} from './sign-in-and-sign-up.style';
 import SignIn from '../../components/sing-in/sing-in.component';
 import SignUp from '../../components/sign-up/sign-up.component';
 
-export const SignInAndSignUp = () => {
+const SignInAndSignUp = () => {
   return (
     <SignInAndSignUpContainer>
       <SignIn />
@@ -13,3 +13,5 @@ export const SignInAndSignUp = () => {
     </SignInAndSignUpContainer>
   );
 };
+
+export default SignInAndSignUp;
