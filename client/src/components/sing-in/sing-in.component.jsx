@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 
-import './sign-in.style.scss';
+import {ButtonsContainer, SignInContainer, Title} from './sign-in.style';
 
 import {
   emailSignInStart,
@@ -31,8 +31,8 @@ const SignIn = ({emailSignInStart, googleSignInStart}) => {
     setCredentials({...credentials, [name]: value});
   };
   return (
-    <div className='sign-in'>
-      <h2>I already have an account</h2>
+    <SignInContainer>
+      <Title>I already have an account</Title>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -51,7 +51,7 @@ const SignIn = ({emailSignInStart, googleSignInStart}) => {
           handleChange={handleChange}
           required
         />
-        <div className='buttons'>
+        <ButtonsContainer>
           <CustomButton type='submit'>Sign In</CustomButton>
           <CustomButton
             type='button'
@@ -60,9 +60,9 @@ const SignIn = ({emailSignInStart, googleSignInStart}) => {
           >
             Sign In with Google
           </CustomButton>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
