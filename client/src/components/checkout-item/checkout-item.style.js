@@ -22,6 +22,10 @@ export const Image = styled.img`
 
 export const TextInfo = styled.span`
   width: 23%;
+
+  @media screen and (max-width: 800px) {
+    font-size: 14px;
+  }
 `;
 
 export const QuantityContainer = styled(TextInfo)`

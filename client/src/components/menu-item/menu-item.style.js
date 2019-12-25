@@ -14,12 +14,12 @@ export const MenuItemContainer = styled.div`
   &:hover {
     cursor: pointer;
 
-    & .background-image {
+     & .background-image {
       transform: scale(1.1);
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 1);
     }
 
-    & .content {
+     & .content {
       opacity: 0.9;
     }
   }
@@ -66,10 +66,12 @@ export const ContentTitle = styled.span`
   font-weight: bold;
   margin-bottom: 6px;
   font-size: 22px;
+  text-transform: uppercase;
   color: #4a4a4a;
 `;
 
 export const ContentSubtitle = styled.span`
   font-weight: lighter;
   font-size: 16px;
+  text-transform: uppercase;
 `;

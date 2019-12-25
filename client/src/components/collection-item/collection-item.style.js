@@ -49,6 +49,10 @@ export const CollectionFooter = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 14px;
+  }
 `;
 
 export const ItemName = styled.span`

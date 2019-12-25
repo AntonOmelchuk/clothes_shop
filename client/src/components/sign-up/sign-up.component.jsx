@@ -67,7 +67,7 @@ const SignUp = ({signUpStart}) => {
           name='confirmPassword'
           type='password'
           value={confirmPassword}
-          label='Password'
+          label='Confirm password'
           required
           minLength='6'
         />
