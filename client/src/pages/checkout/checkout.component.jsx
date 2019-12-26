@@ -17,7 +17,7 @@ import {
 } from '../../redux/cart/cart.selectors';
 import {StripeCheckoutButton} from '../../components/stripe/stripe-checkout.component';
 
-const CheckoutPage = ({cartItems, total}) => (
+export const CheckoutPage = ({cartItems, total}) => (
   <CheckoutPageContainer>
     <CheckoutHeaderContainer>
       <HeaderBlock>
