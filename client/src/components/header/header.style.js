@@ -1,6 +1,17 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 import {Link} from 'react-router-dom';
+
+const OptionItems = css`
+  padding: 10px 15px;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  @media screen and (max-width: 800px) {
+    font-size: 12px;
+    padding: 8px 5px;
+  }
+`;
 
 export const HeaderContainer = styled.div`
   height: 70px;
@@ -39,13 +50,11 @@ export const OptionsContainer = styled.div`
   }
 `;
 
-export const OptionLink = styled(Link)`
-  padding: 10px 15px;
-  text-transform: uppercase;
-  cursor: pointer;
+export const OptionItem = styled.div`
+  ${OptionItems};
+  cursor: unset;
+`;
 
-  @media screen and (max-width: 800px) {
-    font-size: 12px;
-    padding: 8px 5px;
-  }
+export const OptionLink = styled(Link)`
+  ${OptionItems}
 `;

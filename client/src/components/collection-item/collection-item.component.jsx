@@ -12,7 +12,7 @@ import {
   ItemPrice,
 } from './collection-item.style';
 
-const CollectionItem = ({item, addItem}) => {
+export const CollectionItem = ({item, addItem}) => {
   const {name, price, imageUrl} = item;
 
   return (

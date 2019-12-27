@@ -9,7 +9,7 @@ import {
   MenuItemContainer,
 } from './menu-item.style';
 
-const MenuItem = ({title, imageUrl, size, linkUrl, history, match}) => (
+export const MenuItem = ({title, imageUrl, size, linkUrl, history, match}) => (
   <MenuItemContainer
     size={size}
     onClick={() => history.push(`${match.url}${linkUrl}`)}

@@ -5,6 +5,7 @@ import {createStructuredSelector} from 'reselect';
 import {
   HeaderContainer,
   LogoContainer,
+  OptionItem,
   OptionLink,
   OptionsContainer,
 } from './header.style';
@@ -19,16 +20,14 @@ import {selectCartHidden} from '../../redux/cart/cart.selectors';
 import {signOutStart} from '../../redux/users/user.action';
 import {hideCart} from '../../redux/cart/cart.action';
 
-const Header = ({currentUser, hidden, signOutStart, hideCart}) => (
+export const Header = ({currentUser, hidden, signOutStart, hideCart}) => (
   <HeaderContainer>
     <LogoContainer to='/'>
       <Logo onClick={() => hideCart()} />
     </LogoContainer>
     <OptionsContainer>
       {currentUser && currentUser.displayName && (
-        <OptionLink as={`div`} style={{cursor: 'auto'}}>
-          Hi, {currentUser.displayName.split(' ')[0]}!
-        </OptionLink>
+        <OptionItem>Hi, {currentUser.displayName.split(' ')[0]}!</OptionItem>
       )}
       <OptionLink to='/shop' onClick={() => hideCart()}>
         shop
@@ -37,15 +36,15 @@ const Header = ({currentUser, hidden, signOutStart, hideCart}) => (
         contact
       </OptionLink>
       {currentUser ? (
-        <OptionLink
-          as={`div`}
+        <OptionItem
           onClick={() => {
             signOutStart();
             hideCart();
           }}
+          style={{cursor: 'pointer'}}
         >
           Sign Out
-        </OptionLink>
+        </OptionItem>
       ) : (
         <OptionLink to='/signin'>Sign In</OptionLink>
       )}

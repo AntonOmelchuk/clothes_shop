@@ -26,6 +26,7 @@ const ShopPage = ({fetchingCollectionsStart, match}) => {
           component={CollectionsOverviewContainer}
         />
         <Route
+          exact
           path={`${match.path}/:categoryId`}
           component={CollectionPageContainer}
         />
