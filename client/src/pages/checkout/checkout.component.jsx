@@ -5,7 +5,8 @@ import {createStructuredSelector} from 'reselect';
 import {
   CheckoutHeaderContainer,
   CheckoutPageContainer,
-  HeaderBlock, TestCard,
+  HeaderBlock,
+  TestCard,
   Total,
 } from './checkout.style';
 
@@ -45,7 +46,7 @@ export const CheckoutPage = ({cartItems, total}) => (
       <br />
       4242 4242 4242 4242 - Exp: 01/20 - CCV: 123
     </TestCard>
-    <StripeCheckoutButton price={total} />
+    {total > 0 && <StripeCheckoutButton price={total} />}
   </CheckoutPageContainer>
 );
 
